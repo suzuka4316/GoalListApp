@@ -10,6 +10,7 @@ import {
   Platform,
   FlatList,
 } from "react-native";
+import { GoalItem } from "./components";
 
 export default function App() {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -42,11 +43,7 @@ export default function App() {
       <FlatList
         style={styles.listContainer}
         data={courseGoals}
-        renderItem={(itemData) => (
-          <View style={styles.listItem}>
-            <Text>{itemData.item.value}</Text>
-          </View>
-        )}
+        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
       />
 
       {/* ScrollView will make your app slow if the list is infinite because it will render all the items at once */}
@@ -78,13 +75,7 @@ const styles = StyleSheet.create({
   listContainer: {
     margin: 20,
   },
-  listItem: {
-    padding: 10,
-    marginVertical: 10,
-    backgroundColor: "#ccc",
-    borderColor: "black",
-    borderWidth: 1,
-  },
+
   screen: {
     marginTop: Platform.OS === "ios" ? 50 : 50,
   },

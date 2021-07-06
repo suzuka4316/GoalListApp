@@ -1,5 +1,6 @@
 import React from "react";
+import { View } from "react-native";
 
 export default function GoalInput() {
-  return <div></div>;
+  return <View></View>;
 }

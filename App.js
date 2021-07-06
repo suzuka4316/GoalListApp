@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { StyleSheet, FlatList, SafeAreaView, Button } from "react-native";
+import { StyleSheet, FlatList, SafeAreaView, Button, View } from "react-native";
 import { GoalItem, GoalInput } from "./components";
 
 export default function App() {
@@ -30,7 +30,9 @@ export default function App() {
 
   return (
     <SafeAreaView>
-      <Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
+      <View style={styles.button}>
+        <Button title="Add New Goal" onPress={() => setIsAddMode(true)} />
+      </View>
       <GoalInput
         visible={isAddMode}
         onAddGoal={addGoalHandler}
@@ -63,6 +65,12 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
+  button: {
+    margin: 20,
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    borderRadius: 5,
+  },
   listContainer: {
     margin: 20,
   },

@@ -18,7 +18,7 @@ export const GoalInput = (props) => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Course Goal"
+          placeholder="Enter a Goal"
           onChangeText={goalInputHandler}
           value={enteredGoal}
         />
@@ -39,12 +39,16 @@ export const GoalInput = (props) => {
 const styles = StyleSheet.create({
   button: {
     width: "40%",
+    borderColor: "#C0C0C0",
+    borderWidth: 1,
+    borderRadius: 5,
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
     // without giving width, justifyContent won't work
     width: "60%",
+    marginTop: 5,
   },
   input: {
     borderColor: "black",

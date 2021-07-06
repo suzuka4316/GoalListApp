@@ -1,15 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  ScrollView,
-  Platform,
-  FlatList,
-} from "react-native";
+import { StyleSheet, FlatList, SafeAreaView } from "react-native";
 import { GoalItem, GoalInput } from "./components";
 
 export default function App() {
@@ -25,7 +16,7 @@ export default function App() {
   };
 
   return (
-    <View style={styles.screen}>
+    <SafeAreaView>
       <GoalInput onAddGoal={addGoalHandler} />
       <FlatList
         style={styles.listContainer}
@@ -33,7 +24,7 @@ export default function App() {
         renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
       />
 
-      {/* ScrollView will make your app slow if the list is infinite because it will render all the items at once */}
+      {/* ScrollView will make your app slow if the list is big because it will render all the items at once */}
       {/* <ScrollView style={styles.listContainer}>
         {courseGoals.map((goal) => 
           <View style={styles.listItem}>
@@ -42,15 +33,12 @@ export default function App() {
         )}
       </ScrollView> */}
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   listContainer: {
     margin: 20,
-  },
-  screen: {
-    marginTop: Platform.OS === "ios" ? 50 : 50,
   },
 });

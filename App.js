@@ -10,18 +10,31 @@ export default function App() {
     setCourseGoals((currentGoals) => [
       ...currentGoals,
       //FlatList searches for key property automatically
-      { key: Math.random().toString(), value: goalTitle },
+      { id: Math.random().toString(), value: goalTitle },
     ]);
     // setCourseGoals([...courseGoals, enteredGoal]);
+  };
+
+  const removeGoalHandler = (goalId) => {
+    setCourseGoals((currentGoals) => {
+      return currentGoals.filter((goal) => goal.id !== goalId);
+    });
   };
 
   return (
     <SafeAreaView>
       <GoalInput onAddGoal={addGoalHandler} />
       <FlatList
+        keyExtractor={(item, index) => item.id}
         style={styles.listContainer}
         data={courseGoals}
-        renderItem={(itemData) => <GoalItem title={itemData.item.value} />}
+        renderItem={(itemData) => (
+          <GoalItem
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
+          />
+        )}
       />
 
       {/* ScrollView will make your app slow if the list is big because it will render all the items at once */}

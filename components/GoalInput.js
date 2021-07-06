@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import { StyleSheet, View, TextInput, Button, Modal } from "react-native";
 
 export const GoalInput = (props) => {
   const [enteredGoal, setEnteredGoal] = useState("");
@@ -8,31 +8,55 @@ export const GoalInput = (props) => {
     setEnteredGoal(enteredText);
   };
 
+  const addGoalHandler = () => {
+    props.onAddGoal(enteredGoal);
+    setEnteredGoal("");
+  };
+
   return (
-    <View style={styles.inputContainer}>
-      <TextInput
-        style={styles.input}
-        placeholder="Course Goal"
-        onChangeText={goalInputHandler}
-        value={enteredGoal}
-      />
-      {/* onPress={() => props.onAddGoal(enteredGoal)} */}
-      <Button title="ADD" onPress={props.onAddGoal.bind(this, enteredGoal)} />
-    </View>
+    <Modal visible={props.visible} animationType="slide">
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Course Goal"
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
+        />
+        {/* onPress={() => props.onAddGoal(enteredGoal)} */}
+        <View style={styles.buttonContainer}>
+          <View style={styles.button}>
+            <Button title="CANCEL" color="red" onPress={props.onCancel} />
+          </View>
+          <View style={styles.button}>
+            <Button title="ADD" onPress={addGoalHandler} />
+          </View>
+        </View>
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
+  button: {
+    width: "40%",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    // without giving width, justifyContent won't work
+    width: "60%",
+  },
   input: {
     borderColor: "black",
     borderWidth: 1,
     borderRadius: 5,
-    padding: 6,
-    minWidth: 200,
+    padding: 10,
+    width: "80%",
   },
   inputContainer: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
+    // without flex: 1, input container's size will be adjusted to children component's size
+    flex: 1,
+    justifyContent: "center",
     alignItems: "center",
   },
 });
